@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Binance Risk Assessment",
+  "description": "Binance smart risk assessment skill for position sizing and risk management. Analyzes volatility, funding rates, liquidation distance, and provides composite risk scores with actionable recommendations.",
+  "x-icon": "/skills/binance_risk/binance_risk.png",
+  "x-tags": [
+    "Analytics",
+    "Crypto",
+    "DeFi"
+  ],
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "title": "Enabled",
+      "description": "Whether this skill is enabled",
+      "default": false
+    },
+    "states": {
+      "type": "object",
+      "properties": {
+        "binance_risk_assess_position": {
+          "type": "string",
+          "title": "Assess Position Risk",
+          "enum": [
+            "disabled",
+            "public",
+            "private"
+          ],
+          "x-enum-title": [
+            "Disabled",
+            "Agent Owner + All Users",
+            "Agent Owner Only"
+          ],
+          "description": "Assess the risk of a Binance Futures position. Analyzes volatility, funding rate impact, liquidation distance, and returns a composite risk score (0-100) with recommendations.",
+          "default": "disabled"
+        },
+        "binance_risk_calculate_size": {
+          "type": "string",
+          "title": "Calculate Position Size",
+          "enum": [
+            "disabled",
+            "public",
+            "private"
+          ],
+          "x-enum-title": [
+            "Disabled",
+            "Agent Owner + All Users",
+            "Agent Owner Only"
+          ],
+          "description": "Calculate optimal position size using fixed-percentage risk model. Takes account balance, risk tolerance, leverage, and stop loss to determine safe position sizing. Auto-suggests stop loss from ATR if not provided.",
+          "default": "disabled"
+        }
+      },
+      "description": "States for each Binance Risk Assessment skill (disabled, public, or private)"
+    }
+  },
+  "required": [
+    "states",
+    "enabled"
+  ],
+  "additionalProperties": true
+}
